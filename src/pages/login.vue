@@ -56,7 +56,7 @@ export default {
         method: "post",
         data: this.user
       }).then(res => {
-          console.log(res);
+        
           
        if(res.data.isok){
            this.$router.push('/index')
