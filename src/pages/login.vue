@@ -56,13 +56,17 @@ export default {
         method: "post",
         data: this.user
       }).then(res => {
-        
-          
-       if(res.data.isok){
-           this.$router.push('/index')
-       }else{
-         alert(res.data.info)
-       }
+        if (res.data.isok) {
+          localStorage.setItem('user',this.user.name);
+          sessionStorage.setItem('isAdmin',res.data.type);
+          this.$message({
+            message: res.data.info,
+            type: "success"
+          });
+          this.$router.push("/index");
+        } else {
+          this.$message.error(res.data.info);
+        }
       });
     }
   }

@@ -11,6 +11,15 @@ const weixiu = () => import('../pages/weixiu.vue')
 const witer = () => import('../pages/witer.vue')
 const xiugai = () => import('../pages/xiugai.vue')
 const welcom = () => import('../pages/welcom.vue')
+const teatcherlei = () => import('../pages/teatcherlei.vue')
+const teatherbanner = () => import('../pages/teatherbanner.vue')
+const teatcherpai = () => import('../pages/teatcherpai.vue')
+const witerzhan = () => import('../pages/witerzhan.vue')
+const witerguan = () => import('../pages/witerguan.vue')
+const xiu = () => import('../pages/xiu.vue')
+const weixiuping = () => import('../pages/weixiuping.vue')
+const jiabanner = () => import('../pages/jiabanner.vue')
+const jiaman = () => import('../pages/jiaman.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -29,20 +38,67 @@ export default new Router({
           component: banner
         }, {
           path: 'jiazheng',
-          name: '家政管理',
           component: jiazheng,
+          children: [
+            {
+              path: 'jiabanner',
+              component: jiabanner,
+            }, {
+              path: 'jiaman',
+              component: jiaman,
+            }, {
+              path: '',
+              redirect: 'jiabanner',
+            },
+          ]
         }, {
           path: 'teacher',
-          name: '家教管理',
           component: teacher,
+          children: [
+            {
+              path: 'teatcherlei',
+              component: teatcherlei,
+            }, {
+              path: 'teatherbanner',
+              component: teatherbanner,
+            }, {
+              path: 'teatcherpai',
+              component: teatcherpai,
+            }, {
+              path: '',
+              redirect: 'teatherbanner'
+            }
+          ]
         }, {
           path: 'witer',
-          name: '水站管理',
           component: witer,
+          children: [
+            {
+              path: 'witerzhan',
+              component: witerzhan,
+            }, {
+              path: 'witerguan',
+              component: witerguan,
+            },{
+              path:'',
+              redirect:'witerzhan',
+            }
+          ]
         }, {
           path: 'weixiu',
-          name: '维修管理',
           component: weixiu,
+          children: [
+            {
+              path: 'xiu',
+              component: xiu,
+            }, {
+              path: 'weixiuping',
+              component: weixiuping,
+            },{
+              path:'',
+              redirect:'xiu',
+            }
+          ]
         }, {
           path: 'xiugai',
           name: '修改密码',
@@ -61,7 +117,7 @@ export default new Router({
       component: login
     }, {
       path: '*',
-      redirect: 'index'
+      redirect: 'login'
     }
   ]
 })

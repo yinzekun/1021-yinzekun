@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <el-button type="danger" @click="ishow=true">删除</el-button>
+    <el-button type="danger" class="btn" @click="ishow=true">删除</el-button>
     <div class="box1" v-if="ishow" @click.self="ishow=false">
       <div class="box2">
         <h3>提示</h3>
@@ -25,20 +25,7 @@ export default {
   methods: {
     bty() {
       this.ishow = false;
-      this.$axios({
-        url: Api.del,
-        method: "post",
-        data: {
-          id:this.id
-        }
-      }).then(res => {
-        if (res.data.isok) {
-          this.ishow = false;
-          this.$emit("getc1", res.data.info);
-        } else {
-          alert(res.data.info);
-        }
-      });
+      this.$emit("getc1", this.id);
     }
   }
 };
@@ -49,7 +36,6 @@ export default {
 .item {
   display: inline-block;
 }
-
 h3 {
   line-height: 40px;
   text-indent: 2em;

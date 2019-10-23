@@ -7,21 +7,26 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import Compont from './components/common/index'
- for( var i in Compont){
-      Vue.component(i,Compont[i])
- }
+for (var i in Compont) {
+  Vue.component(i, Compont[i])
+}
+
+import Filter from './filter'
+for(var i in Filter){
+  Vue.filter(i,Filter[i])
+}
 
 import './assets/css/base.css'
 import axios from 'axios'
 
-Vue.prototype.$axios=axios;
+Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
-axios.interceptors.response.use(config=>{
-  
+axios.interceptors.response.use(config => {
+
   // console.log(config)
-  if(config.data.code==-1){//未登录
+  if (config.data.code == -1) {//未登录
     router.replace("/login")
     return;
   }
@@ -29,23 +34,23 @@ axios.interceptors.response.use(config=>{
 })
 
 //路由守卫 前置守卫
-// router.beforeEach((to,from,next)=>{
-//   if(to.path=='/login'){
-//     next();
-//     return;
-//   }
+router.beforeEach((to, from, next) => {
+  if (to.path == '/login') {
+    next();
+    return;
+  }
 
-//   if(to.path.includes("index")){
-//     if(sessionStorage.getItem("isAdmin")=='0'){
-//       next()
-//     }else{
-//       next("/login")
-//     }
-//     return;
-//   }
- 
-//   next()
-// })
+  if (to.path.includes("index")) {
+    if (localStorage.getItem('user') !== null) {
+      next()
+    } else {
+      next("/login")
+    }
+    return;
+  }
+
+  next()
+})
 
 new Vue({
   el: '#app',

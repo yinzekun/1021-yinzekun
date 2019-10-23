@@ -26,10 +26,10 @@ export default {
     bty() {
       this.ishow = false;
       this.$axios({
-        url: Api.del,
-        method: "post",
-        data: {
-          id:this.id
+        url: Api.delBanner,
+        method: "get",
+        params: {
+          id: this.id
         }
       }).then(res => {
         if (res.data.isok) {
